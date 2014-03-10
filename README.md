@@ -2,6 +2,8 @@
 
 A front-end HTML data filter using jQuery and Knockout.js
 
+** Perfect for filtering through identically set-out data records, ie. publications, member records etc. Simply add an input, bind to Knockout model (binding info below) and search with multiple keywords (separate using commas))
+
 # Original purpose:
 
 Filtering of publications displayed at www.pharmatelligence.co.uk/publications
@@ -33,7 +35,7 @@ To kick things off, you should ensure that data elements to be filtered have ide
 	  </article>
 	</section>
 
-This plugin uses Knockout.js to consume your search query. Add the following to your <input> element to bind it to the Knockout Model and to update the observable with every key press:
+This plugin uses Knockout.js to consume your search query. Add the following to your input element to bind it to the Knockout Model and to update the observable with every key press:
 
 	data-bind="value: filterQuery, valueUpdate:'afterkeyup"
 
@@ -50,8 +52,8 @@ But all the above this is useless without the all-important event bind on load (
 
 # Filters
 
-When filtering has not been enabled (ie. when <input data-bind="value: filterQuery"> doesn't have focus and is empty) all data elements are inactive, and when data elements are matched/unmatched their statuses are set to active/disabled repectively.
-Filterable.js updates inactive, active and disabled data elements using CSS. There are 6 different overrides for filterType, with 3 attributed states:
+When filtering has not been enabled (ie. when input doesn't have focus and is empty) all data elements are deemed inactive, and when data elements are matched/unmatched their classes are set to active/disabled respectively.
+Filterable.js updates inactive, active and disabled data elements using CSS. There are 6 CSS reliant overrides for filterType, with 3 attributed states:
 
 ## 'background' (default)
 * filterInactive - 'inherit'
@@ -83,7 +85,13 @@ Filterable.js updates inactive, active and disabled data elements using CSS. The
 * filterActive - 'visible'
 * filterDisabled - 'hidden'
 
-Any of these items can be overriden for a specific contexts by binding options during the event bind:
+To change the filterType and use the default settings, add the following options during event bind:
+
+	$('section.container article').filterable({
+     filterType: 'border'
+	});
+
+Or to change filterType and all attributed settings for a specfic context:
 
 
 	$('section.container article').filterable({
