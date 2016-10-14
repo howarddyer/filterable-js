@@ -1,103 +1,70 @@
 # Filterable.js
 
-A front-end HTML data filter using jQuery and Knockout.js
+A HTML element filter using jQuery and Knockout.js
 
-** Perfect for filtering through identically set-out data records, ie. publications, member records etc. Simply add an input, bind to Knockout model (binding info below) and search with multiple keywords (separate using commas))
+<a href="http://codepen.io/howarddyer/pen/GjGXvb" target="_blank">Demo</a>
 
-# Original purpose:
+** Perfect for filtering through identically set-out data records, ie. publications, member records etc.
 
-Filtering of publications displayed at www.pharmatelligence.co.uk/publications
+## Original purpose:
 
-# Initialising Filterable.js:
+Filtering of publications at www.pharmatelligence.co.uk
+
+## Files
 
 The following files should be referenced in the header:
+
 * jQuery (http://jquery.com/)
 * knockout.js (http://knockoutjs.com/)
 * filterable.min.js
 
-To kick things off, you should ensure that data elements to be filtered have identical HTML structure. It also helps to increase specificity by wrapping data elements in a parent element, ie:
+## HTML structure
 
-	<section class='container'>
-	
+You should ensure that elements to be filtered have identical HTML structure. It also helps to increase specificity by wrapping elements in a parent element, i.e.:
+
+	<section class="filterable">
+
 	  <article>
 	    <h1>Data element 1</h1>
-	    <p>Foo</p>
+	    <p>foo bar</p>
 	  </article>
-	
+
 	  <article>
 	    <h1>Data element 2</h1>
-	    <p>Foo</p>
+	    <p>bar baz</p>
 	  </article>
-	
+
 	  <article>
 	    <h1>Data element 3</h1>
-	    <p>Baz</p>
+	    <p>baz qux</p>
 	  </article>
+
 	</section>
+
+Remember to bind the library:
+
+	<script>
+		$('.filterable article').filterable();
+	</script>
+
+## Output
 
 This plugin uses Knockout.js to consume your search query. Add the following to your input element to bind it to the Knockout Model and to update the observable with every key press:
 
-	data-bind="value: filterQuery, valueUpdate:'afterkeyup"
+	data-bind="value: queryString, valueUpdate: 'afterkeyup'"
 
 Results of the filtering can also be outputted by adding the following attributes to HTML elements:
 
-	data-bind="text: matchedRecords" // outputs amount of matched records
-	data-bind="text: searchQuery" // outputs current search query
+	data-bind="text: matches" // outputs amount of matched records
+	data-bind="text: queryString" // outputs current search query
 
-But all the above this is useless without the all-important event bind on load (ideally in the footer):
+# Styling
 
-	<script>
-     $('section.container article').filterable({});
-	</script>
+When element are filtered, the following classes are assigned depending on whether the query matches any of the text contents:
 
-# Filters
+* filterable-match
+* filterable-no-match
 
-When filtering has not been enabled (ie. when input doesn't have focus and is empty) all data elements are deemed inactive, and when data elements are matched/unmatched their classes are set to active/disabled respectively.
-Filterable.js updates inactive, active and disabled data elements using CSS. There are 6 CSS reliant overrides for filterType, with 3 attributed states:
+For a quick solution, add the following CSS code to hide all elements that do not match the query:
 
-## 'background' (default)
-* filterInactive - 'inherit'
-* filterActive - 'green'
-* filterDisabled - 'inherit'
-
-## 'border'
-* filterInactive - 'inherit'
-* filterActive - 'solid 1px green'
-* filterDisabled - 'inherit'
-
-## 'color'
-* filterInactive - 'inherit'
-* filterActive - 'green'
-* filterDisabled - 'inherit'
-
-## 'display'
-* filterInactive - 'inherit'
-* filterActive - 'inherit'
-* filterDisabled - 'none'
-
-## 'opacity'
-* filterInactive - 'inherit'
-* filterActive - '1'
-* filterDisabled - '.3'
-
-## 'visibility'
-* filterInactive - 'inherit'
-* filterActive - 'visible'
-* filterDisabled - 'hidden'
-
-To change the filterType and use the default settings, add the following options during event bind:
-
-	$('section.container article').filterable({
-     filterType: 'border'
-	});
-
-Or to change filterType and all attributed settings for a specfic context:
-
-
-	$('section.container article').filterable({
-     filterType: 'color',
-     filterInactive: 'black',
-     filterActive: 'blue',
-     filterDisabled: 'grey'
-	});
-
+	  .filterable-no-match{display: none;}
