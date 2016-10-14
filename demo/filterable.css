@@ -1,0 +1,5 @@
+input{margin-right: 10px;}
+section{margin-top: 20px}
+article{border: solid 1px black; float: left; margin-right: 20px; padding: 20px; width: 150px;}
+.filterable-match{}
+.filterable-no-match{display: none;}

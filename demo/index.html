@@ -1,0 +1,41 @@
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script type="text/javascript" src="filterable.min.js"></script>
+    <link type="text/css" href="filterable.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <input type="text" data-bind="value: queryString, valueUpdate: 'afterkeyup'"/>
+    <span data-bind="visible: queryString"><strong data-bind="text: matches"></strong> matched items for query <strong data-bind="text: queryString"></strong></span>
+
+    <section class="filterable">
+
+      <article>
+        <h1>Data element 1</h1>
+        <p>foo bar</p>
+      </article>
+
+      <article>
+        <h1>Data element 2</h1>
+        <p>bar baz</p>
+      </article>
+
+      <article>
+        <h1>Data element 3</h1>
+        <p>baz qux</p>
+      </article>
+
+    </section>
+
+    <script type="text/javascript">
+      $('.filterable article').filterable();
+    </script>
+
+  </body>
+</html>
